@@ -15,7 +15,9 @@ public class AnalisadorLexico {
         // TODO code application logic here        
         
         //Leitura de um arquivo texto        
-        model.Analise analisador = new Analise("codigo/CodigoFonteLexico.txt");        
+        model.Analise analisador = new Analise("codigo/CodigoFonteLexico.txt");
+        
+        //Oi Matheus
     }
     
 }
