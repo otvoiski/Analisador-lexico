@@ -18,7 +18,7 @@ public class AnalisadorLexico {
         model.Analise analisador = new Analise("codigo/CodigoFonteLexico.txt");
         
         //Oi Matheus
-        //Otávio da o cú na botinha!
+        //OI!
     }
     
 }
