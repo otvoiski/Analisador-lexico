@@ -1,0 +1,5 @@
+int valor;
+string nome = "Matheus";
+real taxa = 0.093;
+string msg;
+int a,b,c;
