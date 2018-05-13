@@ -132,7 +132,6 @@ public class Analise {
 
         try {
             //while(Arquivo.read() != -1){
-            
             //Esta apenas 1 linha ou seja não ta tendo looping
                 TokenAtual = 0;                                                 //Aponta para o inicio
                 
@@ -142,7 +141,7 @@ public class Analise {
                 String[] temp = Expressao.split(" ");                           //Existe uma forma manual e mais precisa do que o split.
 
                 token = new Token();
-                token.setRepresentacao(temp[TokenAtual]);
+                token.setRepresentacao(temp[TokenAtual]);//guarda no objeto a palavra lida
                 
                 /*INICIO ANALISE LEXICA*/
                     if(S(token)){                                               //Inicia a Analise Lexica
@@ -180,7 +179,7 @@ public class Analise {
             return true;
         
         if(T(token)) {            
-            if(L()) {
+            if(L(token)) {
                 if(V()) {    
                     if(";".equals(token.getRepresentacao())) {                        
                         return Err.show(5);
@@ -222,14 +221,38 @@ public class Analise {
                 token.setRepresentacao("S");
                 token.setClasse("reserv");  
                 break;
-            default:                
+            default:
                 saida = Err.show(1);
-                break;
+                return false;
         }
         
         return saida;
     }
-    private boolean L(){return false;}
+    private boolean L(Token token){
+        int auxAscii = 32;//caractere ascii referente ao simbolo " "(espaço)
+        char[] invalidChars = new char[30];
+        
+        boolean saida = true;
+        
+        for (int i = 0; i <= 9; i++) {            
+            if(token.getRepresentacao().charAt(0) == i)             
+                return Err.show(6);            
+        }
+        
+        //TECHO DE CÓDIGO PARA PEGAR OS CARACTERES NA TABELA ASCII QUE NÃO PODEM SER USANDO COMO NOME DE IDENTIFICADOR
+        for(int i = 0; i<invalidChars.length; i++){
+            invalidChars[i] = (char)auxAscii;
+            auxAscii++;//incrementa para o prox caractere especial na tabela ascii
+            if(auxAscii == 46)auxAscii = 58;
+            if(auxAscii == 64)auxAscii = 91;
+            if(auxAscii == 96)auxAscii = 123;
+        }
+        for(int i = 0; i<invalidChars.length; i++){
+            if(token.getRepresentacao().charAt(0) == invalidChars[i])
+                return Err.show(6);
+        }
+        return saida;
+    }
     private boolean M(){return false;}
     private boolean V(){return false;}     
     
