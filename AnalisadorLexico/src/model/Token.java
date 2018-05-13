@@ -24,7 +24,7 @@
 package model;
 
 /**
- *
+ * Classe de valores do Token
  * @author Otávio Voiski, Matheus Ribeiro, Maycon Ferrari, Marcio Almeida
  */
 public class Token {
