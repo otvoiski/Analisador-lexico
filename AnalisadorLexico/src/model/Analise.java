@@ -25,6 +25,7 @@ package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,25 +55,66 @@ import java.util.logging.Logger;
 */
 public class Analise {
     private final boolean DEBUG;
-    
+        
     private String Diretorio;
-    private String[] PalavrasReservadas;  
+    private String Expressao;                                                   // Expressão lida
+    private ArrayList<String> PalavrasReservadas;                               // Palavras reservadas
+    private ArrayList<Token> Tokens;                                            // Tabela de Tokens
 
     public Analise(String diretorio) {
-        DEBUG = false;        
-        this.Diretorio = diretorio;
+        /* Inicio Construtor */
+        this.DEBUG = false;                                                     //Debug é usado para mostrar mensagens!
+        this.Diretorio = diretorio;                                             //Diretorio do arquivo
+        /* Fim Construtor */
         
-        PalavrasReservadas = new String[3];
-        PalavrasReservadas[0] = "int";
-        PalavrasReservadas[1] = "string";
-        PalavrasReservadas[2] = "real";
+        /* Inicio Listas */
+        PalavrasReservadas = new ArrayList<>();                                 //Palavras reservadas
+        Tokens = new ArrayList<>();                                             //Tokens lidos
+        /* Fim Listas */        
+        
+        /* Inicio Palavras Reservadas */
+        PalavrasReservadas.add("int");
+        PalavrasReservadas.add("string");
+        PalavrasReservadas.add("real");
+        /* Fim Palavras Reservadas */
+        
+        CarregarCodigo();
+    }
+
+    /**
+     * Faz a leitura do codigo, este codigo é rodado assim que o contrutor
+     * é iniciado.
+     */
+    private void CarregarCodigo() {
+        Token token;
+        
+        try {
+            File file = new File(Diretorio);
+            if(file.exists()){
+                Scanner scan = new Scanner(file);
+
+                while (scan.hasNext()) {                                            //Verifica se existe um Token a ser lido                
+                    if(DEBUG)   System.out.println(scan.next());                    //Printa o token
+                    //token = new Token();
+                }
+            } else 
+                System.out.println("Arquivo não encontrado no local " + Diretorio);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    /** 
+    *   Retorna a lista de Tokens encontrados atravez da Expressão
+    *   @return ArrayList<Token>
+    */
+    public ArrayList<Token> Analisar() {
+        return null;
     }
     
     public void CarregaCodigo(){
          
         int i = 0;
         String[] Codigo = new String[20];
-        char Aspas = '"';
         
         try {
             File File = new File(this.Diretorio);
@@ -106,15 +148,27 @@ public class Analise {
     public void AnalisaPalavra(String Palavra){
     
         int i = 0;
-        do{
-            if( Palavra.equals(PalavrasReservadas[i])){
+        
+        do {
+            if( Palavra.equals(PalavrasReservadas.get(i))){
                     
         
             }
-        }while(i < PalavrasReservadas.length || !Palavra.equals(PalavrasReservadas[i]));
+        }   while (i < PalavrasReservadas.size() || !Palavra.equals(PalavrasReservadas.get(i)));
             
         if(";".equals(Palavra)){
             
         }
     }
+
+    public String getExpressao() {
+        return Expressao;
+    }
+
+    public void setExpressao(String Expressao) {
+        this.Expressao = Expressao;
+    }
+    
+    
+    
 }
