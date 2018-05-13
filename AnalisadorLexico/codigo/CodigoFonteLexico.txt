@@ -1,5 +1,5 @@
 int valor;
-string nome = "Matheus";
+string nome = "Matheus lixo";
 real taxa = 0.093;
 string msg;
 int a,b,c;
