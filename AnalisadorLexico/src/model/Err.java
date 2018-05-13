@@ -48,8 +48,8 @@ public class Err {
                 saida = false;
                 break;
             case 2:
-                msg = "";
-                saida = false;
+                msg = "Não projetado";
+                saida = true;
                 break;
             case 3:
                 msg = "";
